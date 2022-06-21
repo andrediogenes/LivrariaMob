@@ -2,6 +2,8 @@ package alura.com.livrariamob.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -10,7 +12,7 @@ import alura.com.livrariamob.OBJETOS.Usuario;
 
 public class DAO extends SQLiteOpenHelper {
     public DAO(Context context) {
-        super(context, "USUARIO", null, 1);
+        super(context, "USUARIO", null, 2);
     }
 
     @Override
@@ -51,18 +53,24 @@ public class DAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insereUsuario(Usuario usuario){
+    public String insereUsuario(Usuario usuario){
         SQLiteDatabase db = getWritableDatabase();
 
         //Dados a serem gravados no banco
-        ContentValues dados_usuario = new ContentValues();
-        dados_usuario.put("NOME", usuario.getUsuario_nome());
-        dados_usuario.put("CPF", usuario.getUsuario_CPF());
-        dados_usuario.put("DATANASC", usuario.getUsuario_nasc());
-        dados_usuario.put("EHADM", usuario.isUsuario_adm());
+        try {
+            ContentValues dados_usuario = new ContentValues();
+            dados_usuario.put("USUARIO_NOME", usuario.getUsuario_nome());
+            dados_usuario.put("USUARIO_CPF", usuario.getUsuario_CPF());
+            dados_usuario.put("USUARIO_DATANASC", usuario.getUsuario_nasc());
+            dados_usuario.put("USUARIO_EHADM", usuario.isUsuario_adm());
+            dados_usuario.put("USUARIO_SENHA", usuario.getUsuario_senha());
 
-        db.insert("USUARIO", null,dados_usuario);
-        db.close();
+            db.insertOrThrow("USUARIO", null,dados_usuario);
+            db.close();
+        } catch (SQLiteConstraintException erro) {
+            return "Erro ao cadastrar usuário";
+        }
+        return "Sucesso ao cadastrar usuário";
     }
 
     public void insereLivro(Livro livro){

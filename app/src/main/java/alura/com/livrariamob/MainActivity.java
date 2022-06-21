@@ -25,6 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    public String insereUsuarioMain(String nome , String CPF, String datanasc, boolean ehadm, String senha){
+        Usuario usuario = new Usuario();
+
+        usuario.setUsuario_nome(nome);
+        usuario.setUsuario_CPF(CPF);
+        usuario.setUsuario_nasc(datanasc);
+        usuario.setUsuario_adm(ehadm);
+        usuario.setUsuario_senha(senha);
+
+        DAO dao = new DAO(this);
+
+        String resultado = dao.insereUsuario(usuario);
+        return resultado;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +54,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         //Inserindo um adm do sistema
-        Usuario usuario = new Usuario();
-        usuario.setUsuario_nome("Andre");
-        usuario.setUsuario_CPF("12345678");
-        usuario.setUsuario_nasc("31/01/1996");
-        usuario.setUsuario_adm(true);
-
-        DAO dao = new DAO(this);
-        dao.insereUsuario(usuario);
+        String resultado = insereUsuarioMain("Andre diogenes", "1234567890", "31/01/1996", true, "1234");
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
