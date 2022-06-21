@@ -1,10 +1,20 @@
 package alura.com.livrariamob.OBJETOS;
 
-public class usuario {
+public class Usuario {
     Integer usuario_id;
     String usuario_nome;
     String usuario_CPF;
     String usuario_nasc;
+    String usuario_senha;
+
+    public String getUsuario_senha() {
+        return usuario_senha;
+    }
+
+    public void setUsuario_senha(String usuario_senha) {
+        this.usuario_senha = usuario_senha;
+    }
+
     boolean usuario_adm;
 
     public Integer getUsuario_id() {

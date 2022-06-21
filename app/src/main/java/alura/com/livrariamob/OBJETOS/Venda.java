@@ -1,6 +1,6 @@
 package alura.com.livrariamob.OBJETOS;
 
-public class venda {
+public class Venda {
     Integer venda_id;
     Integer venda_id_usuario;
     Integer venda_id_livro;
@@ -9,10 +9,6 @@ public class venda {
 
     public Integer getVenda_id() {
         return venda_id;
-    }
-
-    public void setVenda_id(Integer venda_id) {
-        this.venda_id = venda_id;
     }
 
     public Integer getVenda_id_usuario() {

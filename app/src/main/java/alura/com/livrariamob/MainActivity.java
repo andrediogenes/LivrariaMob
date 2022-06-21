@@ -13,6 +13,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import alura.com.livrariamob.DAO.DAO;
+import alura.com.livrariamob.OBJETOS.Usuario;
 import alura.com.livrariamob.databinding.ActivityMainBinding;
 
 import android.view.Menu;
@@ -35,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        //Inserindo um adm do sistema
+        Usuario usuario = new Usuario();
+        usuario.setUsuario_nome("Andre");
+        usuario.setUsuario_CPF("12345678");
+        usuario.setUsuario_nasc("31/01/1996");
+        usuario.setUsuario_adm(true);
+
+        DAO dao = new DAO(this);
+        dao.insereUsuario(usuario);
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,6 @@
 package alura.com.livrariamob.OBJETOS;
 
-public class livro {
+public class Livro {
     Integer livro_id;
     Integer usuario_cadastro_id;
     String livro_nome;
